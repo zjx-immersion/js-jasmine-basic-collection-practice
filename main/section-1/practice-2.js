@@ -1,15 +1,20 @@
 'use strict';
 
+function isCollectionIncluded(collection, str) {
+    for (let strCollcetion of collection) {
+        for (let s of strCollcetion) {
+            if (s === str) {
+                return true;
+            }
+        }
+    }
+}
+
 module.exports = function collectSameElements(collectionA, collectionB) {
     let newArr = []
     for (let strOfA of collectionA) {
-        for (let arrOfB of collectionB) {
-            for (let strOfB of arrOfB) {
-                if (strOfA === strOfB) {
-                    newArr.push(strOfA)
-                    break
-                }
-            }
+        if (isCollectionIncluded(collectionB, strOfA)) {
+            newArr.push(strOfA);
         }
     }
     return newArr;
